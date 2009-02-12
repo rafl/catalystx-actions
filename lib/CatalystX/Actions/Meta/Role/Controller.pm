@@ -33,7 +33,12 @@ sub add_action {
 
 sub action_methods {
     my ($self) = @_;
-    return grep { $_->isa($self->action_method_metaclass) } $self->get_all_methods;
+    my $method_class = $self->action_method_metaclass;
+    return grep {
+        $_->isa('Class::MOP::Method::Wrapped')
+            ? $_->get_original_method->isa($method_class)
+            : $_->isa($method_class)
+    } $self->get_all_methods;
 }
 
 1;

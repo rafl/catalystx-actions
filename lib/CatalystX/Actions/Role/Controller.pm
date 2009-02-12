@@ -23,13 +23,17 @@ sub create_action_from_method {
     my $namespace = $self->action_namespace($app);
     my $reverse   = $namespace ? "${namespace}/${name}" : $name;
 
+    my $attrs = $method->isa('Class::MOP::Method::Wrapped')
+        ? $method->get_original_method->attributes
+        : $method->attributes;
+
     return $self->create_action(
         name       => $name,
         code       => $method->body,
         reverse    => $reverse,
         namespace  => $namespace,
         class      => blessed($self) || $self,
-        attributes => $self->_parse_action_attrs($app, $method->name, $method->attributes),
+        attributes => $self->_parse_action_attrs($app, $method->name, $attrs),
     );
 }
 

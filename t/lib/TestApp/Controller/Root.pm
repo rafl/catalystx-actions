@@ -16,6 +16,11 @@ action index => (Chained => 'base', PathPart => '', Args => 0) => sub {
     $c->response->body('OH HAI!');
 };
 
+after index => sub {
+    my ($self, $c) = @_;
+    $c->response->header('X-Method-Modifier' => 'works');
+};
+
 no CatalystX::Actions::Declare;
 
 1;
