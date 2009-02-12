@@ -1,4 +1,6 @@
 package CatalystX::Actions::Meta::Method;
+#TODO: I guess at some point this would become a Catalyst::Action or a role
+#      that gets applied to it
 
 use Moose;
 

@@ -13,7 +13,7 @@ has action_method_metaclass => (
     default  => 'CatalystX::Actions::Meta::Method',
 );
 
-#FIXME
+#FIXME: BUILD apparently isn't the right thing to use in a role
 use CatalystX::Actions::Meta::Method;
 
 sub BUILD {

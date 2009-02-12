@@ -7,6 +7,9 @@ use namespace::clean -except => 'meta';
 
 after register_actions => sub {
     my ($self, $app) = @_;
+
+    #TODO: don't assume the action_methods method exists
+    #TODO: walk the superclasses to collect all actions
     my @methods = find_meta($self)->action_methods;
 
     for my $method (@methods) {
