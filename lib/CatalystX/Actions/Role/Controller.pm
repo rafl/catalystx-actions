@@ -8,7 +8,6 @@ use namespace::clean -except => 'meta';
 after register_actions => sub {
     my ($self, $app) = @_;
     my @methods = find_meta($self)->action_methods;
-    warn join q{, }, map { join q{::}, $_->package_name, $_->name } @methods;
 
     for my $method (@methods) {
         my $action = $self->create_action_from_method($app, $method);
